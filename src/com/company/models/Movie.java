@@ -1,5 +1,6 @@
 package com.company.models;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Movie {
@@ -47,6 +48,35 @@ public class Movie {
                 ", description='" + description + '\'' +
                 ", director=" + director +
                 ", cast=" + cast +
-                '}';
+                "}\n";
     }
+
+    public static Comparator<Movie> sortMovieByNameInAccendingOrder = new Comparator<Movie>() {
+        @Override
+        public int compare(Movie o1, Movie o2) {
+            return o1.name.compareTo(o2.name);
+        }
+    };
+
+    public static Comparator<Movie> sortMovieByNameInDeccendingOrder = new Comparator<Movie>() {
+        @Override
+        public int compare(Movie o1, Movie o2) {
+            return o2.name.compareTo(o1.name);
+        }
+    };
+
+    public static Comparator<Movie> sortMovieByDirectorInAccendingOrder = new Comparator<Movie>() {
+        @Override
+        public int compare(Movie o1, Movie o2) {
+            return o1.director.getFullName().compareTo(o2.director.getFullName());
+        }
+    };
+
+    public static Comparator<Movie> sortMovieByDirectorInDeccendingOrder = new Comparator<Movie>() {
+        @Override
+        public int compare(Movie o1, Movie o2) {
+            return o2.director.getFullName().compareTo(o1.director.getFullName());
+        }
+    };
+
 }

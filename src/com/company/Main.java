@@ -1,16 +1,63 @@
 package com.company;
 
-import com.company.models.Movie;
-
-import java.util.List;
+import com.company.services.impl.FindAbleImpl;
+import com.company.services.impl.SortAbleImpl;
 import java.util.Scanner;
 
 public class Main {
 
-    private static Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
+        FindAbleImpl findAble = new FindAbleImpl();
+        SortAbleImpl sortAble = new SortAbleImpl();
 
+
+        while (true) {
+            commands();
+            String button = button();
+            switch (button) {
+                case "1" -> sortAble.printAllMovies();
+                case "2" -> sortAble.findMovie();
+                case "3" -> sortAble.sortByYear();
+                case "4" -> sortAble.sortByName();
+                case "5" -> sortAble.sortByDirector();
+                case "6" -> findAble.findMoviesByActor();
+                case "7" -> findAble.findMoviesByDirector();
+                case "8" -> findAble.findMoviesByYear();
+                case "9" -> findAble.findMoviesAndRoleByActor();
+                case "10" -> findAble.showActorRoles();
+            }
+            if (button.equals("x")) break;
+        }
+
+
+//        String number = "null";
+//        while (!number.equals("x")){
+//            commands();
+//            System.out.println("Choose a command: ");
+//            number = in.nextLine();
+//            try{
+//                if (Character.isDigit(number.charAt(0))){
+//                    switch (number){
+//                        case "1" -> sortAble.printAllMovies();
+//                        case "2" -> sortAble.findMovie();
+//                        case "3" -> sortAble.sortByYear();
+//                        case "4" -> sortAble.sortByName();
+//                        case "5" -> sortAble.sortByDirector();
+//                        case "6" -> findAble.findMoviesByActor();
+//                        case "7" -> findAble.findMoviesByDirector();
+//                        case "8" -> findAble.findMoviesByYear();
+//                        case "9" -> findAble.findMoviesAndRoleByActor();
+//                        case "10" -> findAble.showActorRoles();
+//                    }
+//                }else {
+//                    throw new RuntimeException();
+//                }
+//            } catch (RuntimeException e) {
+//                System.out.println("It is not a button");
+//            }
+//    }
     }
 
 
@@ -29,8 +76,8 @@ public class Main {
         System.out.println("---------------------------------------------");
     }
 
-    static String button(){
-        System.out.println("Choose a command: ");
+    static String button() {
+        System.out.print("Choose a command: ");
         return in.nextLine();
     }
 }
