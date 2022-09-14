@@ -74,16 +74,16 @@ public class FindAbleImpl implements FindAble {
             System.out.print("Enter movie's year: ");
             int year = scanner.nextInt();
             if (year >= 2005 && year <= 2022) {
-                for (int i = 0; i < movieList.size(); i++) {
-                    if (movieList.get(i).getYear() == year) {
-                        System.out.println("Name:        " + movieList.get(i).getName());
-                        System.out.println("Year:        " + movieList.get(i).getYear());
-                        System.out.println("Description: " + movieList.get(i).getDescription());
-                        System.out.println("Director:    " + movieList.get(i).getDirector().getFullName());
+                for (Movie movie : movieList) {
+                    if (movie.getYear() == year) {
+                        System.out.println("Name:        " + movie.getName());
+                        System.out.println("Year:        " + movie.getYear());
+                        System.out.println("Description: " + movie.getDescription());
+                        System.out.println("Director:    " + movie.getDirector().getFullName());
                         System.out.println("Cast: ");
-                        for (int j = 0; j < movieList.get(i).getCast().size(); j++) {
-                            System.out.println("Full name:   " + movieList.get(i).getCast().get(j).getFullName());
-                            System.out.println("Role:        " + movieList.get(i).getCast().get(j).getRole());
+                        for (int j = 0; j < movie.getCast().size(); j++) {
+                            System.out.println("Full name:   " + movie.getCast().get(j).getFullName());
+                            System.out.println("Role:        " + movie.getCast().get(j).getRole());
                         }
                         System.out.println("------------------------------");
                     }
@@ -95,37 +95,6 @@ public class FindAbleImpl implements FindAble {
             System.out.println("It's not year!");
         }
     }
-
-//    @Override
-//    public void findMoviesByYear() {
-//        List<Movie> movieList = JsonIO.getMovies();
-//        System.out.print("Enter movie's year: ");
-//        int year = scanner.nextInt();
-//        int counter = 0;
-//        for (int i = 0; i < movieList.size(); i++) {
-//            if (JsonIO.getMovies().get(i).getYear() == year){
-//                System.out.println("Name:        " + movieList.get(i).getName());
-//                System.out.println("Year:        " + movieList.get(i).getYear());
-//                System.out.println("Description: " + movieList.get(i).getDescription());
-//                System.out.println("Director:    " + movieList.get(i).getDirector().getFullName());
-//                System.out.println("Cast: ");
-//                for (int j = 0; j < movieList.get(i).getCast().size(); j++) {
-//                    System.out.println("Full name:   " + movieList.get(i).getCast().get(j).getFullName());
-//                    System.out.println("Role:        " + movieList.get(i).getCast().get(j).getRole());
-//                }
-//                System.out.println("------------------------------");
-//                counter++;
-//                break;
-//            }
-//        }
-//        try {
-//            if (counter == 0)
-//                throw new Exception();
-//        }
-//        catch (Exception e){
-//            System.out.println(year + " is not found");
-//        }
-//    }
 
     @Override
     public void findMoviesAndRoleByActor() {
