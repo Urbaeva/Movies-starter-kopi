@@ -13,51 +13,34 @@ public class Main {
         SortAbleImpl sortAble = new SortAbleImpl();
 
 
-        while (true) {
+        String number = "hi";
+        while (!number.equals("x")){
+            try{
             commands();
-            String button = button();
-            switch (button) {
-                case "1" -> sortAble.printAllMovies();
-                case "2" -> sortAble.findMovie();
-                case "3" -> sortAble.sortByYear();
-                case "4" -> sortAble.sortByName();
-                case "5" -> sortAble.sortByDirector();
-                case "6" -> findAble.findMoviesByActor();
-                case "7" -> findAble.findMoviesByDirector();
-                case "8" -> findAble.findMoviesByYear();
-                case "9" -> findAble.findMoviesAndRoleByActor();
-                case "10" -> findAble.showActorRoles();
+            System.out.println("Choose a command: ");
+            number = in.nextLine().trim();
+                if (Character.isDigit(number.charAt(0))){
+                    switch (number){
+                        case "1" -> sortAble.printAllMovies();
+                        case "2" -> sortAble.findMovie();
+                        case "3" -> sortAble.sortByYear();
+                        case "4" -> sortAble.sortByName();
+                        case "5" -> sortAble.sortByDirector();
+                        case "6" -> findAble.findMoviesByActor();
+                        case "7" -> findAble.findMoviesByDirector();
+                        case "8" -> findAble.findMoviesByYear();
+                        case "9" -> findAble.findMoviesAndRoleByActor();
+                        case "10" -> findAble.showActorRoles();
+                        default -> System.out.println("Choose correct button!");
+                    }
+                }
+                else {
+                    throw new Exception();
+                }
+            } catch (Exception e) {
+                System.out.println("It is not a button");
             }
-            if (button.equals("x")) break;
         }
-
-
-//        String number = "null";
-//        while (!number.equals("x")){
-//            commands();
-//            System.out.println("Choose a command: ");
-//            number = in.nextLine();
-//            try{
-//                if (Character.isDigit(number.charAt(0))){
-//                    switch (number){
-//                        case "1" -> sortAble.printAllMovies();
-//                        case "2" -> sortAble.findMovie();
-//                        case "3" -> sortAble.sortByYear();
-//                        case "4" -> sortAble.sortByName();
-//                        case "5" -> sortAble.sortByDirector();
-//                        case "6" -> findAble.findMoviesByActor();
-//                        case "7" -> findAble.findMoviesByDirector();
-//                        case "8" -> findAble.findMoviesByYear();
-//                        case "9" -> findAble.findMoviesAndRoleByActor();
-//                        case "10" -> findAble.showActorRoles();
-//                    }
-//                }else {
-//                    throw new RuntimeException();
-//                }
-//            } catch (RuntimeException e) {
-//                System.out.println("It is not a button");
-//            }
-//    }
     }
 
 
@@ -73,6 +56,7 @@ public class Main {
         System.out.println("Press 8 to find movies by year");
         System.out.println("Press 9 to List all movies and roles by actor's name");
         System.out.println("Press 10 to sorted List of all actors with his roles");
+        System.out.println("Press x  to exit");
         System.out.println("---------------------------------------------");
     }
 

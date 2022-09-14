@@ -62,46 +62,61 @@ public class SortAbleImpl implements SortAble {
     public void sortByYear() {
         List<Movie> movieList = JsonIO.getMovies();
         System.out.print("Enter 1 (sort In Accending Order)\nEnter 2 (sort In Deccending Order): ");
-        int choose = scanner.nextInt();
-        if (choose == 1) {
-            Comparator<Movie> sortMovieByYearInAccendingOrder = new Comparator<Movie>() {
-                @Override
-                public int compare(Movie o1, Movie o2) {return o1.getYear() - o2.getYear();}
-            };
-            movieList.sort(sortMovieByYearInAccendingOrder);
-            for (Movie i: movieList) {
-                System.out.println(i);
-            }
-        }
-        if (choose == 2){
-            Comparator<Movie> sortMovieByYearInDeccendingOrder = new Comparator<Movie>() {
-                @Override
-                public int compare(Movie o1, Movie o2) {
-                    return o2.getYear() - o1.getYear();
+        String choose = scanner.nextLine();
+        String choose1 = "1", choose2 = "2";
+        if (choose.length() > 0) {
+            if (choose.equals(choose1)) {
+                Comparator<Movie> sortMovieByYearInAccendingOrder = new Comparator<Movie>() {
+                    @Override
+                    public int compare(Movie o1, Movie o2) {
+                        return o1.getYear() - o2.getYear();
+                    }
+                };
+                movieList.sort(sortMovieByYearInAccendingOrder);
+                for (Movie i : movieList) {
+                    System.out.println(i);
                 }
-            };
-            movieList.sort(sortMovieByYearInDeccendingOrder);
-            for (Movie i: movieList) {
-                System.out.println(i);
+            }
+            if (choose.equals(choose2)) {
+                Comparator<Movie> sortMovieByYearInDeccendingOrder = new Comparator<Movie>() {
+                    @Override
+                    public int compare(Movie o1, Movie o2) {
+                        return o2.getYear() - o1.getYear();
+                    }
+                };
+                movieList.sort(sortMovieByYearInDeccendingOrder);
+                for (Movie i : movieList) {
+                    System.out.println(i);
+                }
+            }
+            else{
+                System.out.println("No such button!");
             }
         }
     }
+
 
     @Override
     public void sortByName() {
         List<Movie> movieList = JsonIO.getMovies();
         System.out.print("Enter 1 (sort In Accending Order)\nEnter 2 (sort In Deccending Order): ");
-        int choose = scanner.nextInt();
-        if (choose == 1) {
-            movieList.sort(Movie.sortMovieByNameInAccendingOrder);
-            for (Movie i: movieList) {
-                System.out.println(i);
+        String choose = scanner.nextLine();
+        String choose1 = "1", choose2 = "2";
+        if (choose.length() > 0) {
+            if (choose.equals(choose1)) {
+                movieList.sort(Movie.sortMovieByNameInAccendingOrder);
+                for (Movie i : movieList) {
+                    System.out.println(i);
+                }
             }
-        }
-        if (choose == 2) {
-            movieList.sort(Movie.sortMovieByNameInDeccendingOrder);
-            for (Movie i : movieList) {
-                System.out.println(i);
+            if (choose.equals(choose2)) {
+                movieList.sort(Movie.sortMovieByNameInDeccendingOrder);
+                for (Movie i : movieList) {
+                    System.out.println(i);
+                }
+            }
+            else{
+                System.out.println("No such button!");
             }
         }
     }
@@ -111,17 +126,23 @@ public class SortAbleImpl implements SortAble {
     public void sortByDirector() {
         List<Movie> movieList = JsonIO.getMovies();
         System.out.print("Enter 1 (sort In Accending Order)\nEnter 2 (sort In Deccending Order): ");
-        int choose = scanner.nextInt();
-        if (choose == 1) {
-            movieList.sort(Movie.sortMovieByDirectorInAccendingOrder);
-            for (Movie i : movieList) {
-                System.out.println(i);
+        String choose = scanner.nextLine();
+        String choose1 = "1", choose2 = "2";
+        if (choose.length() > 0) {
+            if (choose.equals(choose1)) {
+                movieList.sort(Movie.sortMovieByDirectorInAccendingOrder);
+                for (Movie i : movieList) {
+                    System.out.println(i);
+                }
             }
-        }
-        if (choose == 2) {
-            movieList.sort(Movie.sortMovieByDirectorInDeccendingOrder);
-            for (Movie i : movieList) {
-                System.out.println(i);
+            if (choose.equals(choose2)) {
+                movieList.sort(Movie.sortMovieByDirectorInDeccendingOrder);
+                for (Movie i : movieList) {
+                    System.out.println(i);
+                }
+            }
+            else{
+                System.out.println("No such button!");
             }
         }
     }

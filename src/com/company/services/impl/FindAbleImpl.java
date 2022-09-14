@@ -14,7 +14,7 @@ public class FindAbleImpl implements FindAble {
     public void findMoviesByActor() {
         List<Movie> movieList = JsonIO.getMovies();
         System.out.print("Enter actor's name: ");
-        String actorName = scanner.nextLine();
+        String actorName = scanner.nextLine().trim();
         int counter = 0;
         for (Movie movie : movieList) {
             for (int j = 0; j < movie.getCast().size(); j++) {
@@ -39,7 +39,7 @@ public class FindAbleImpl implements FindAble {
     public void findMoviesByDirector() {
         List<Movie> movieList = JsonIO.getMovies();
         System.out.print("Enter director's name: ");
-        String directorName = scanner.nextLine();
+        String directorName = scanner.nextLine().trim();
         int counter = 0;
         for (Movie movie : movieList) {
             if (movie.getDirector().getFullName().equalsIgnoreCase(directorName) ||
@@ -70,33 +70,62 @@ public class FindAbleImpl implements FindAble {
     @Override
     public void findMoviesByYear() {
         List<Movie> movieList = JsonIO.getMovies();
-        System.out.print("Enter movie's year: ");
-        int year = scanner.nextInt();
-        int counter = 0;
-        for (int i = 0; i < movieList.size(); i++) {
-            if (JsonIO.getMovies().get(i).getYear() == year){
-                System.out.println("Name:        " + movieList.get(i).getName());
-                System.out.println("Year:        " + movieList.get(i).getYear());
-                System.out.println("Description: " + movieList.get(i).getDescription());
-                System.out.println("Director:    " + movieList.get(i).getDirector().getFullName());
-                System.out.println("Cast: ");
-                for (int j = 0; j < movieList.get(i).getCast().size(); j++) {
-                    System.out.println("Full name:   " + movieList.get(i).getCast().get(j).getFullName());
-                    System.out.println("Role:        " + movieList.get(i).getCast().get(j).getRole());
-                }
-                System.out.println("------------------------------");
-                counter++;
-                break;
-            }
-        }
         try {
-            if (counter == 0)
-                throw new Exception();
-        }
-        catch (Exception e){
-            System.out.println(year + " is not found");
+            System.out.print("Enter movie's year: ");
+            int year = scanner.nextInt();
+            if (year >= 2005 && year <= 2022) {
+                for (int i = 0; i < movieList.size(); i++) {
+                    if (movieList.get(i).getYear() == year) {
+                        System.out.println("Name:        " + movieList.get(i).getName());
+                        System.out.println("Year:        " + movieList.get(i).getYear());
+                        System.out.println("Description: " + movieList.get(i).getDescription());
+                        System.out.println("Director:    " + movieList.get(i).getDirector().getFullName());
+                        System.out.println("Cast: ");
+                        for (int j = 0; j < movieList.get(i).getCast().size(); j++) {
+                            System.out.println("Full name:   " + movieList.get(i).getCast().get(j).getFullName());
+                            System.out.println("Role:        " + movieList.get(i).getCast().get(j).getRole());
+                        }
+                        System.out.println("------------------------------");
+                    }
+                }
+            } else {
+                System.out.println("This movie is not in the catalog!");
+            }
+        } catch (Exception e){
+            System.out.println("It's not year!");
         }
     }
+
+//    @Override
+//    public void findMoviesByYear() {
+//        List<Movie> movieList = JsonIO.getMovies();
+//        System.out.print("Enter movie's year: ");
+//        int year = scanner.nextInt();
+//        int counter = 0;
+//        for (int i = 0; i < movieList.size(); i++) {
+//            if (JsonIO.getMovies().get(i).getYear() == year){
+//                System.out.println("Name:        " + movieList.get(i).getName());
+//                System.out.println("Year:        " + movieList.get(i).getYear());
+//                System.out.println("Description: " + movieList.get(i).getDescription());
+//                System.out.println("Director:    " + movieList.get(i).getDirector().getFullName());
+//                System.out.println("Cast: ");
+//                for (int j = 0; j < movieList.get(i).getCast().size(); j++) {
+//                    System.out.println("Full name:   " + movieList.get(i).getCast().get(j).getFullName());
+//                    System.out.println("Role:        " + movieList.get(i).getCast().get(j).getRole());
+//                }
+//                System.out.println("------------------------------");
+//                counter++;
+//                break;
+//            }
+//        }
+//        try {
+//            if (counter == 0)
+//                throw new Exception();
+//        }
+//        catch (Exception e){
+//            System.out.println(year + " is not found");
+//        }
+//    }
 
     @Override
     public void findMoviesAndRoleByActor() {
@@ -133,62 +162,42 @@ public class FindAbleImpl implements FindAble {
             treeSetActors.addAll(i.getCast());
         }
         System.out.print("Enter 1 (sort In Accending Order)\nEnter 2 (sort In Deccending Order): ");
-        int choose = scanner.nextInt();
-        if (choose == 1) {
-            for (Cast cast : treeSetActors) {
-                System.out.println("Actor name: " + cast.getFullName());
-                for (Movie movie : movieList) {
-                    for (int k = 0; k < movie.getCast().size(); k++) {
-                        if (cast.getFullName().equals(movie.getCast().get(k).getFullName())) {
-                            System.out.println("Movie name: " + movie.getName());
-                            System.out.print("Roles     : ");
-                            System.out.println("* " + movie.getCast().get(k).getRole() + "  ");
+        String choose = scanner.nextLine();
+        String choose1 = "1", choose2 = "2";
+        if (choose.length() > 0) {
+            if (choose.equals(choose1)) {
+                for (Cast cast : treeSetActors) {
+                    System.out.println("Actor name: " + cast.getFullName());
+                    for (Movie movie : movieList) {
+                        for (int k = 0; k < movie.getCast().size(); k++) {
+                            if (cast.getFullName().equals(movie.getCast().get(k).getFullName())) {
+                                System.out.println("Movie name: " + movie.getName());
+                                System.out.print("Roles     : ");
+                                System.out.println("* " + movie.getCast().get(k).getRole() + "  ");
+                            }
                         }
                     }
+                    System.out.println("________________________________");
                 }
-                System.out.println("________________________________");
             }
-        }
-        if (choose == 2) {
-            TreeSet<Cast> treeSetActorDes = (TreeSet<Cast>) treeSetActors.descendingSet();
-            for (Cast cast : treeSetActorDes) {
-                System.out.println("Actor name: " + cast.getFullName());
-                for (Movie movie : movieList) {
-                    for (int k = 0; k < movie.getCast().size(); k++) {
-                        if (cast.getFullName().equals(movie.getCast().get(k).getFullName())) {
-                            System.out.println("Movie name: " + movie.getName());
-                            System.out.print("Roles     : ");
-                            System.out.println("* " + movie.getCast().get(k).getRole() + "  ");
+            if (choose.equals(choose2)) {
+                TreeSet<Cast> treeSetActorDes = (TreeSet<Cast>) treeSetActors.descendingSet();
+                for (Cast cast : treeSetActorDes) {
+                    System.out.println("Actor name: " + cast.getFullName());
+                    for (Movie movie : movieList) {
+                        for (int k = 0; k < movie.getCast().size(); k++) {
+                            if (cast.getFullName().equals(movie.getCast().get(k).getFullName())) {
+                                System.out.println("Movie name: " + movie.getName());
+                                System.out.print("Roles     : ");
+                                System.out.println("* " + movie.getCast().get(k).getRole() + "  ");
+                            }
                         }
                     }
+                    System.out.println("________________________________");
                 }
-                System.out.println("________________________________");
+            } else {
+                System.out.println("No such button!");
             }
         }
     }
-
-//    @Override
-//    public void showActorRoles() {
-//        List<Movie> movieList = JsonIO.getMovies();
-//        List<Cast> listActors = new ArrayList<>();
-//        for (Movie i : movieList) {
-//            listActors.addAll(i.getCast());
-//        }
-//        System.out.print("Enter 1 (sort In Accending Order)\nEnter 2 (sort In Deccending Order): ");
-//        int choose = scanner.nextInt();
-//        if (choose == 1) {
-//            listActors.sort(Cast.sortActorNameInAccendingOrder);
-//            for (Cast i : listActors) {
-//                System.out.println("Actor name: " + i.getFullName() + "\t\tRoll: " + i.getRole());
-//            }
-//        }
-//        if (choose == 1) {
-//            listActors.sort(Cast.sortActorNameInDeccendingOrder);
-//            for (Cast i : listActors) {
-//                System.out.println("Actor name: " + i.getFullName() + "\t\tRoll: " + i.getRole());
-//            }
-//        }
-//    }
-
-
 }
